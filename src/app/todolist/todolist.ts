@@ -9,14 +9,16 @@ import { FormsModule, NgForm } from "@angular/forms";
   styleUrl: './todolist.css',
 })
 export class Todolist {
-  taskArray = [{taskName: 'Brush teeth', isComplete: false}]
+  // taskArray = [{taskName: 'Brush teeth', isComplete: false}]
+
+  taskArray: Array<{taskName:string; isComplete: boolean; isEditable: boolean}>= [];
 
   onSubmit(form: NgForm) {
     console.log(form);
 
     this.taskArray.push({
       taskName: form.controls['task'].value,
-      isComplete:false
+      isComplete:false, isEditable: false
     })
 
     form.reset();
@@ -32,6 +34,16 @@ export class Todolist {
     console.log(this.taskArray);
 
     this.taskArray[index].isComplete = !this.taskArray[index].isComplete;
+  }
+
+  onEdit(index: number) {
+    this.taskArray[index].isEditable = true;
+  }
+
+  onSave(index: number, newtask: string) {
+    this.taskArray[index].taskName = newtask;
+    this.taskArray[index].isEditable = false;
+    
   }
 }
 

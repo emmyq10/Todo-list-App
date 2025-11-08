@@ -1,6 +1,7 @@
 h1 {
     text-align: center;
     font-size: 2rem;
+    margin-top: 20px;
 }
 
 #submitButton {
@@ -9,4 +10,36 @@ h1 {
 
 #myCheckbox {
     margin-left: 30px;
+}
+
+#sumbmitForm {
+    margin-top: 40px;
+}
+
+#taskIntable {
+    max-width: 300px;
+}
+
+#delete {
+    width: 60px;
+}
+
+#edit {
+    width: 60px;
+}
+
+#save {
+    width: 60px;
+}
+
+.edit {
+    border: solid 2px yellow;
+}
+
+.not-edit {
+    border: none;
+}
+
+.crossed {
+    text-decoration: line-through;
 }

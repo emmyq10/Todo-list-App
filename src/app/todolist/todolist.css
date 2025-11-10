@@ -37,9 +37,22 @@ h1 {
 }
 
 .not-edit {
+    background-color: rgb(230, 230, 230);
     border: none;
 }
 
 .crossed {
     text-decoration: line-through;
+}
+
+p.fw-bold {
+  text-align: center;
+  font-size: 1.1rem;
+  margin-top: 20px;
+}
+
+p.fw-bold span {
+  margin-left: 10px;
+  font-weight: normal;
+  color: #555;
 }

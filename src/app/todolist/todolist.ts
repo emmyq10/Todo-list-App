@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { FormsModule, NgForm } from "@angular/forms";
 
 @Component({
@@ -11,6 +11,9 @@ import { FormsModule, NgForm } from "@angular/forms";
 export class Todolist {
   // taskArray = [{taskName: 'Brush teeth', isComplete: false}]
 
+  count = signal<number>(0);
+  completedCount = signal<number>(0)
+
   taskArray: Array<{taskName:string; isComplete: boolean; isEditable: boolean}>= [];
 
   onSubmit(form: NgForm) {
@@ -21,19 +24,39 @@ export class Todolist {
       isComplete:false, isEditable: false
     })
 
+    this.updateCount();
+
     form.reset();
   }
 
-  onDelete(index: number) {
-    console.log(index);
+  updateCount() {
+    let arrayLength = this.taskArray.length;
+    this.count.set(arrayLength);
+    this.updateCompletedCount();
+  }
 
+  
+  updateCompletedCount() {
+    const completed = this.taskArray.filter(task => task.isComplete).length;
+    this.completedCount.set(completed);
+  }
+
+  onDelete(index: number) {
+    const wasCompleted = this.taskArray[index].isComplete;
     this.taskArray.splice(index, 1);
+
+    this.updateCount();
+    if (wasCompleted) {
+      this.updateCompletedCount();
+    }
+
   }
 
   onCheck(index: number) {
     console.log(this.taskArray);
 
     this.taskArray[index].isComplete = !this.taskArray[index].isComplete;
+    this.updateCompletedCount();
   }
 
   onEdit(index: number) {
@@ -46,5 +69,6 @@ export class Todolist {
     
   }
 }
+
 
 
